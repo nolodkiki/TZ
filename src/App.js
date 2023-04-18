@@ -1,7 +1,7 @@
 import Card from "./components/Card";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchItems, like, removeItem } from "./redux/slices/counterSlice";
+import { fetchItems, like, likedItems, removeItem } from "./redux/slices/counterSlice";
 
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
 
   const [pageNumber, setPageNumber] = useState(1);
   const [likedCards, setLikedCards] = useState(false)
+  console.log(likedCards)
 
   useEffect(() => {
     dispatch(fetchItems(pageNumber))
@@ -24,14 +25,15 @@ function App() {
 
   const togleLike = (id) => {
     dispatch(like(id))
+    dispatch(likedItems())
   }
   const removeCard = (id) => {
     dispatch(removeItem(id))
   }
+  const likedHeroes = () => state.cards.likeItems.map(({ id, name, image, like }) => {
+    return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} image={image} checklike={like} />
+  })
 
-  // const likeHeroes = () => state.cards.items.filter(item => {
-  //   return item.like ? item : null
-  // })
   const heroes = () => state.cards.items.map(({ id, name, image, like }) => {
     return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} image={image} checklike={like} />
   })
@@ -46,15 +48,15 @@ function App() {
         </div>
       </div >
       <div className="container">
-        <div onClick={setLikedCards(!likedCards)} className="filter">
-          <p>LIKED</p>
+        <div onClick={() => setLikedCards(!likedCards)} className="filter">
+          <p className={`${likedCards ? 'active' : null}`}>LIKED</p>
         </div>
         <div className="cards">
-          {/* {likedCards ? likeHeroes() : heroes()} */}
-          {heroes()}
+          {likedCards ? likedHeroes() : heroes()}
+          {/* {heroes()} */}
         </div>
         <button onClick={() => { nextPage(pageNumber) }}>Показать ещё</button>
-      </div>
+      </div >
     </>
   );
 }

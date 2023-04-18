@@ -11,6 +11,7 @@ export const fetchItems = createAsyncThunk(
 
 const initialState = {
     items: [],
+    likeItems: [],
     status: null,
     error: null,
     pages: null
@@ -21,9 +22,16 @@ export const counterSlice = createSlice({
     initialState,
     reducers: {
         like(state, action) {
-            state.items.map(item => {
+            state.items.forEach(item => {
                 if (action.payload === item.id) {
                     return item.like = !item.like
+                }
+            })
+        },
+        likedItems(state, action) {
+            state.likeItems = state.items.filter(item => {
+                if (item.like) {
+                    return item
                 }
             })
         },
@@ -33,14 +41,12 @@ export const counterSlice = createSlice({
                     return item
                 }
             })
-        },
-        likedCards(state) {
-            state.items = state.items.filter(item => {
-                if (item.like === true) {
+            state.likeItems = state.likeItems.filter(item => {
+                if (action.payload !== item.id) {
                     return item
                 }
             })
-        }
+        },
     },
     extraReducers: {
         [fetchItems.pending]: (state) => {
@@ -56,6 +62,6 @@ export const counterSlice = createSlice({
     }
 })
 
-export const { like, removeItem } = counterSlice.actions
+export const { like, removeItem, likedItems } = counterSlice.actions
 
 export default counterSlice.reducer
