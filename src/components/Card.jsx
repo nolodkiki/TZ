@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import './card.css'
 
 import disLike from '../icons/disableLike.png'
 import activeLike from '../icons/activeLike.png'
-const Card = ({ like, removeCard, id, name, image, checklike }) => {
+const Card = ({ like, removeCard, id, name, type, gender, image, checklike }) => {
 
 
     return (
@@ -15,14 +14,16 @@ const Card = ({ like, removeCard, id, name, image, checklike }) => {
                         <h1>{name}</h1>
                     </div>
                     <div className='information-subtitle'>
-                        <p>INFORMATION</p>
+                        <p>gender: {gender}</p>
+                        {type === '' ? null : <p>type: {type}</p>}
+
                     </div>
                 </div>
 
                 <div className="buttons">
-                    {checklike 
-                    ? <img onClick={() => like(id)} className='like' src={activeLike} alt="like" /> 
-                    : <img onClick={() => like(id)} className='like' src={disLike} alt="like" />}
+                    {checklike
+                        ? <img onClick={() => like(id)} className='like' src={activeLike} alt="like" />
+                        : <img onClick={() => like(id)} className='like' src={disLike} alt="like" />}
 
                     <button onClick={() => removeCard(id)}>Удалить</button>
                 </div>

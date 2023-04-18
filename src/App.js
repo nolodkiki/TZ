@@ -30,12 +30,12 @@ function App() {
   const removeCard = (id) => {
     dispatch(removeItem(id))
   }
-  const likedHeroes = () => state.cards.likeItems.map(({ id, name, image, like }) => {
-    return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} image={image} checklike={like} />
+  const likedHeroes = () => state.cards.likeItems.map(({ id, name, type, gender, image, like }) => {
+    return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} type={type} gender={gender} image={image} checklike={like} />
   })
 
-  const heroes = () => state.cards.items.map(({ id, name, image, like }) => {
-    return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} image={image} checklike={like} />
+  const heroes = () => state.cards.items.map(({ id, name, type, gender, image, like }) => {
+    return <Card key={id} like={togleLike} removeCard={removeCard} id={id} name={name} type={type} gender={gender} image={image} checklike={like} />
   })
   return (
     <>
@@ -48,14 +48,14 @@ function App() {
         </div>
       </div >
       <div className="container">
-        <div onClick={() => setLikedCards(!likedCards)} className="filter">
-          <p className={`${likedCards ? 'active' : null}`}>LIKED</p>
+        <div className={`filter ${likedCards ? 'active' : null}`}>
+          <p onClick={() => setLikedCards(!likedCards)}>LIKED</p>
         </div>
         <div className="cards">
           {likedCards ? likedHeroes() : heroes()}
-          {/* {heroes()} */}
         </div>
-        <button onClick={() => { nextPage(pageNumber) }}>Показать ещё</button>
+        {likedCards ? null : <button className="btn-showMore" onClick={() => { nextPage(pageNumber) }}>Показать ещё</button>}
+
       </div >
     </>
   );

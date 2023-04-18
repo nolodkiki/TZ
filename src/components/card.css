@@ -7,9 +7,11 @@
 
     border-radius: 5px;
 }
+
 .card-image {
     height: 200px;
 }
+
 .rightside {
     width: 100%;
     padding: 15px;
@@ -17,18 +19,23 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .rightside h1 {
     color: #45A29E;
     font-size: 20px;
 }
+
 .information-subtitle {
     color: #C5C6C7;
+    padding-top: 10px;
 }
+
 .buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .like {
     cursor: pointer;
     height: 25px;

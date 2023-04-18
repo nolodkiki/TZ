@@ -118,7 +118,6 @@ body {
   font-size: 20px;
   display: flex;
   justify-content: center;
-  cursor: pointer;
   /* margin-bottom: 40px; */
 }
 
@@ -127,6 +126,8 @@ body {
   border-radius: 5px;
   padding: 6px;
   margin-bottom: 40px;
+  cursor: pointer;
+
 
   background-color: #1F2833;
 
@@ -136,7 +137,7 @@ body {
   color: red;
 }
 
-.filter.active p {
+.active p {
   color: red;
 }
 
@@ -148,4 +149,9 @@ body {
   gap: 10px;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.btn-showMore {
+  margin: 40px auto;
+  display: block;
 }
